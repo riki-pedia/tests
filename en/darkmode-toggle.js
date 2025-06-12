@@ -11,13 +11,14 @@
           const toggleLink = document.getElementById('theme-toggle-link');
 
           function setTheme(mode) {
+            if (!stylesheet) return;
             if (mode === 'dark') {
               stylesheet.href = 'https://docs.riki-pedia.org/darkmode/dark.css';
-              logoImg.src = 'https://docs.riki-pedia.org/Rikipedia%20Logo%20Dark-1.png';
+              if (logoImg) logoImg.src = 'https://docs.riki-pedia.org/Rikipedia%20Logo%20Dark-1.png';
               if (toggleLink) toggleLink.textContent = 'Switch to Light Mode';
             } else {
               stylesheet.href = 'https://docs.riki-pedia.org/stylesheet.css';
-              logoImg.src = 'https://docs.riki-pedia.org/rikipedia%20logo.webp';
+              if (logoImg) logoImg.src = 'https://docs.riki-pedia.org/rikipedia%20logo.webp';
               if (toggleLink) toggleLink.textContent = 'Switch to Dark Mode';
             }
             localStorage.setItem('theme', mode);
