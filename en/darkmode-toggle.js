@@ -46,7 +46,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // wait for nav to be loaded into #navPh
   setTimeout(() => {
     // check if we're on an article page (customize this condition as needed)
-    if (window.location.pathname.includes('/riki/')) {
+    if (window.location.pathname.includes('/riki/' || window.location.pathname.includes('.html'))) {
       const nav = document.querySelector('.navbar ul');
       if (nav && !nav.querySelector('.home-article-link')) {
         const li = document.createElement('li');
