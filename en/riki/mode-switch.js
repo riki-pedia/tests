@@ -1,5 +1,5 @@
 // wait for nav to load
-    fetch('https://test.riki-pedia.org/en/nav.html')
+    fetch('./article-nav.html')
       .then(response => response.text())
       .then(data => {
         document.getElementById('navPh').innerHTML = data;
