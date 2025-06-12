@@ -41,3 +41,19 @@
           }
         }, 0); // 0ms delay to ensure DOM update
       });
+
+window.addEventListener('DOMContentLoaded', () => {
+  // wait for nav to be loaded into #navPh
+  setTimeout(() => {
+    // check if we're on an article page (customize this condition as needed)
+    if (window.location.pathname.includes('/riki/')) {
+      const nav = document.querySelector('.navbar ul');
+      if (nav && !nav.querySelector('.home-article-link')) {
+        const li = document.createElement('li');
+        li.className = 'home-article-link';
+        li.innerHTML = '<a href="https://en.riki-pedia.org/">Home</a>';
+        nav.insertBefore(li, nav.firstChild);
+      }
+    }
+  }, 100); // delay to ensure nav is loaded
+});
