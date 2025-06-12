@@ -45,10 +45,12 @@
 window.addEventListener('DOMContentLoaded', () => {
   // wait for nav to be loaded into #navPh
   setTimeout(() => {
-    // check if we're on an article page (customize this condition as needed)
+    // check if we're on an article page
     if (window.location.pathname !== 'index.html' && 
       window.location.pathname.includes ('.html') && 
-      window.location.pathname !== '/') {
+      window.location.pathname !== '/' &&
+      !path.endswith ('/en')
+    ) {
       const nav = document.querySelector('.navbar ul');
       if (nav && !nav.querySelector('.home-article-link')) {
         const li = document.createElement('li');
