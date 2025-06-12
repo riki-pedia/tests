@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rikipedia</title>
-    <link rel="stylesheet" href="https://docs.riki-pedia.org/stylesheet.css"/>
+    <link id="theme-stylesheet" rel="stylesheet" href="https://docs.riki-pedia.org/stylesheet.css"/>
     <link rel="apple-touch-icon" sizes="180x180" href="https://docs.riki-pedia.org/favicons/better page/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="https://docs.riki-pedia.org/favicons/better page/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://docs.riki-pedia.org/favicons/better page/favicon-16x16.png">
@@ -23,7 +23,7 @@
 <body>
     <div id="navPh"> <!-- placeholder for the ui from nav --> </div>
     <br/>
-    <img src = "https://docs.riki-pedia.org/rikipedia%20logo.webp" width = "250" alt = "">
+    <img id="logo-img" src="https://docs.riki-pedia.org/rikipedia%20logo.webp" width="250" alt="">
     <form action="https://formspree.io/f/mleyevwq" method="POST">
 <h3>Subscribe to my newsletter!</h3>
 <label>
@@ -36,5 +36,18 @@ Your email:
 </form>
 <h3>Tell me what you think on <a href ="https://forms.gle/b1ZPdYUYXiYGc92Z9">this survey</a>.</h3>
 <h6> be lucky its not in your face blocking your view</h6>
+    <script>
+      // theme switcher
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const stylesheet = document.getElementById('theme-stylesheet');
+      const logoImg = document.getElementById('logo-img');
+      if (prefersDark) {
+        stylesheet.href = 'https://docs.riki-pedia.org/darkmode/dark.css';
+        logoImg.src = 'https://docs.riki-pedia.org/Rikipedia%20Logo%20Dark-1.png';
+      } else {
+        stylesheet.href = 'https://docs.riki-pedia.org/stylesheet.css';
+        logoImg.src = 'https://docs.riki-pedia.org/rikipedia%20logo.webp';
+      }
+    </script>
 </body>
 </html>
