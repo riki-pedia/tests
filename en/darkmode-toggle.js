@@ -4,8 +4,8 @@
       .then(data => {
         document.getElementById('navPh').innerHTML = data;
 
-        // Wait for the DOM to update with the new nav
         setTimeout(() => {
+          // Theme logic...
           const stylesheet = document.getElementById('theme-stylesheet');
           const logoImg = document.getElementById('logo-img');
           const toggleLink = document.getElementById('theme-toggle-link');
@@ -24,14 +24,12 @@
             localStorage.setItem('theme', mode);
           }
 
-          // detect saved or system preference
           let theme = localStorage.getItem('theme');
           if (!theme) {
             theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
           }
           setTheme(theme);
 
-          // toggle on click
           if (toggleLink) {
             toggleLink.addEventListener('click', function(e) {
               e.preventDefault();
@@ -39,25 +37,24 @@
               setTheme(theme);
             });
           }
+
+          // --- Home button logic here ---
+          const path = window.location.pathname;
+          if (
+            path !== '/' &&
+            path !== '/index.html' &&
+            path.endsWith('.html') &&
+            path.includes('/riki/')
+          ) {
+            const nav = document.querySelector('.navbar ul');
+            if (nav && !nav.querySelector('.home-article-link')) {
+              const li = document.createElement('li');
+              li.className = 'home-article-link';
+              li.innerHTML = '<a href="https://en.riki-pedia.org/">Home</a>';
+              nav.insertBefore(li, nav.firstChild);
+            }
+          }
+          // --- End Home button logic ---
+
         }, 0); // 0ms delay to ensure DOM update
       });
-
-window.addEventListener('DOMContentLoaded', () => {
-  // wait for nav to be loaded into #navPh
-  setTimeout(() => {
-    // check if we're on an article page
-    if (window.location.pathname !== 'index.html' && 
-      window.location.pathname.includes ('.html') && 
-      window.location.pathname !== '/' &&
-      !path.endswith ('/en')
-    ) {
-      const nav = document.querySelector('.navbar ul');
-      if (nav && !nav.querySelector('.home-article-link')) {
-        const li = document.createElement('li');
-        li.className = 'home-article-link';
-        li.innerHTML = '<a href="https://en.riki-pedia.org/">Home</a>';
-        nav.insertBefore(li, nav.firstChild);
-      }
-    }
-  }, 100); // delay to ensure nav is loaded
-});
