@@ -1,63 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset = 'utf-8'/>
-<title>How I get files on this site | Rikipedia</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link id = "theme-stylesheet" rel = "stylesheet" href = "https://docs.riki-pedia.org/stylesheet.css">
-<link rel="apple-touch-icon" sizes="180x180" href="https://docs.riki-pedia.org/favicons/better page/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://docs.riki-pedia.org/favicons/better page/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="https://docs.riki-pedia.org/favicons/better page/favicon-16x16.png">
-<link rel="manifest" href="https://docs.riki-pedia.org/favicons/better page/site.webmanifest">
-<link rel="mask-icon" href="https://docs.riki-pedia.org/favicons/better page/safari-pinned-tab.svg" color="#5bbad5">
-<meta name="msapplication-TileColor" content="#00aba9">
-<meta name="theme-color" content="#ffffff">
-<script src="./mode-switch.js"></script>
-<body>
-<div id = "navPh" class = "article-nav"> <!-- placeholder for the ui from nav --> </div>
-  <div class = "text">
-  <h1>How Rikipedia Works</h1>
-  <h3>The process of making this website has gotten more and more complex over the past few months, and it may or may not continue to do so. I will put updates here instead of the old article, which will be deleted soon. For now, please read this.</h3>
-<h4>Rikipedia is made of several key components that will be mentioned in this article. I am not recommending or endorsing any. Just my experience.</h4>
-<h2>PowerShell</h2>
-<p>First, I create a new file with PowerShell. In case you don't know, PowerShell is Microsoft's command line application that has ultimate control over Windows machines. For instance, if used incorrectly, PowerShell can instantly trigger a BSOD (blue screen of death). The command to make a new file would be new-item [path]. This command creates a new file in the path given. If you are a beginner, try your best to avoid PowerShell as it is for advanced users.</p><br/>
-<img src = "https://docs.riki-pedia.org/idk.png" width="586"/>
-<br/>
-<h2>Notepad</h2>
-<p>The next step to publishing an article is editing in Notepad (really). Yes, I edit articles in Notepad because I have not found any other code editor that fits. Editing in Notepad is fine because it is just a text editor, and nothing more than that. I like an application that is simple and easy, without the annoying UI and pop-ups, without bright colors to hurt your eyes, just a normal app.</p><br/>
-<img src = "https://docs.riki-pedia.org/images/notepad.png" width = "400"/><br/>
-<h2>Git</h2>
-<p>Git is probably one of the most complex things involved in Rikipedia. In case you do not know, Git is a command-line interface tool that allows you to update remotely strategically with remote and local files. Git is used by over 90% of developers across the globe. I use Git to get and update content on my github server (aka Rikipedia). Git is kind of annoying to set up because you have to verify your credentials or use SSH (secure shell) to get anything on a server. However, I managed to do so and now use Git a ton.</p><br/>
-<img src = "https://docs.riki-pedia.org/images/git.png" width = "400"/><br/>
-<h2>GitHub (not Git)</h2>
-<p>GitHub, not to be confused with Git, is the main host of Rikipedia. GitHub is a free code-sharing platform used by 100 million developers across the globe. I use Github as the base of Rikipedia and other things within it. Github is pretty easy to use and set up. When using Git to interact with Github, I usually use the SSH key hosted on Github. The SSH key allows me to use more advanced commands to interact with GitHub and Git. The key also means only those with my key can use Git with my page. GitHub is used by developers of all skill levels, including ones you may not expect.</p><br/>
-<img src = "https://docs.riki-pedia.org/images/github.png" width = "400"/><br/>
-<br/><h2>Google/SquareSpace(?)</h2>
-<p>I have the domain name <code>riki-pedia.org</code> through Google Domains, which is getting bought out by Squarespace. I have custom emails and advanced management all on Google Domains. As a few of you may know, my site is on Google Search, and it does pretty well on there. Across all of Google's services, I have search, analytics, and domain management (and maybe hosting soon). I have considered moving Rikipedia to Google Firebase on account of knowing more and more coding languages. But, Google only has a little bit of control over <code>riki-pedia.org</code> compared to the next service...</p>
-<br/><img src = "https://docs.riki-pedia.org/images/google.png" width = "400"/>
-<br/><h2>Cloudflare</h2>
-<p>...Cloudflare. Cloudflare is a website security and delivery network. Cloudflare blocks bad requests, caches my content, and has a user-friendly UI. It is easy to use the app and have full control over what can access your website. During the writing of this article, I used Cloudflare's easy UI to block this annoying crawler that kept trying to get into my website. Cloudflare has top security and has most of my DNS records going through the servers. Cloudflare also helps get me useful analytics and allows me to have full control over what happens. My website would likely be controlled by a hacker right now if it were not for Cloudflare.</p><br/>
-<img src = "https://docs.riki-pedia.org/images/cloud.png" width = "400"/>
-     </div>
-     <!-- Example edit suggestion form -->
-<div id="edit-form-container" style="display:none;" class="edit-form">
-  <h3>Suggest an Edit for this Article</h3>
-  <form id="edit-article-form" autocomplete="off">
-    <label>
-      Your name or email<br>
-      <input type="text" name="user" required />
-    </label><br><br>
-    <label>Explanation of change(s) <br/>
-    <input type="text" name="explanation" required /><br/><br/>
-    </label>
-    <label>
-      Suggested changes (plain text):<br>
-      <textarea name="content" rows="10" cols="60" required></textarea>
-    </label><br><br>
-    <input type="hidden" name="filename" value="en/riki/web-updated.html" />
-    <button type="submit">Submit Suggestion</button>
-  </form>
-  <div id="edit-form-result"></div>
+<div class="text">
+<p>How Rikipedia Works   The process of making this website has gotten more and more complex over the past few months, and it may or may not continue to do so. I will put updates here instead of the old article, which will be deleted soon. For now, please read this. Rikipedia is made of several key components that will be mentioned in this article. I am not recommending or endorsing any. Just my experience. PowerShell First, I create a new file with PowerShell. In case you don't know, PowerShell is Microsoft's command line application that has ultimate control over Windows machines. For instance, if used incorrectly, PowerShell can instantly trigger a BSOD (blue screen of death). The command to make a new file would be new-item [path]. This command creates a new file in the path given. If you are a beginner, try your best to avoid PowerShell as it is for advanced users.</p>
+<p>Notepad The next step to publishing an article is editing in Notepad (really). Yes, I edit articles in Notepad because I have not found any other code editor that fits. Editing in Notepad is fine because it is just a text editor, and nothing more than that. I like an application that is simple and easy, without the annoying UI and pop-ups, without bright colors to hurt your eyes, just a normal app.</p>
+<p>Git Git is probably one of the most complex things involved in Rikipedia. In case you do not know, Git is a command-line interface tool that allows you to update remotely strategically with remote and local files. Git is used by over 90% of developers across the globe. I use Git to get and update content on my github server (aka Rikipedia). Git is kind of annoying to set up because you have to verify your credentials or use SSH (secure shell) to get anything on a server. However, I managed to do so and now use Git a ton.</p>
+<p>GitHub (not Git) GitHub, not to be confused with Git, is the main host of Rikipedia. GitHub is a free code-sharing platform used by 100 million developers across the globe. I use Github as the base of Rikipedia and other things within it. Github is pretty easy to use and set up. When using Git to interact with Github, I usually use the SSH key hosted on Github. The SSH key allows me to use more advanced commands to interact with GitHub and Git. The key also means only those with my key can use Git with my page. GitHub is used by developers of all skill levels, including ones you may not expect.</p>
+<p>Google/SquareSpace(?) I have the domain name riki-pedia.org through Google Domains, which is getting bought out by Squarespace. I have custom emails and advanced management all on Google Domains. As a few of you may know, my site is on Google Search, and it does pretty well on there. Across all of Google's services, I have search, analytics, and domain management (and maybe hosting soon). I have considered moving Rikipedia to Google Firebase on account of knowing more and more coding languages. But, Google only has a little bit of control over riki-pedia.org compared to the next service...</p>
+<p>Cloudflare ...Cloudflare. Cloudflare is a website security and delivery network. Cloudflare blocks bad requests, caches my content, and has a user-friendly UI. It is easy to use the app and have full control over what can access your website. During the writing of this article, I used Cloudflare's easy UI to block this annoying crawler that kept trying to get into my website. Cloudflare has top security and has most of my DNS records going through the servers. Cloudflare also helps get me useful analytics and allows me to have full control over what happens. My website would likely be controlled by a hacker right now if it were not for Cloudflare</p>
 </div>
-</body>
-</html>
