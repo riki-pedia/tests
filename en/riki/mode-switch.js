@@ -4,6 +4,17 @@
       .then(data => {
         document.getElementById('navPh').innerHTML = data;
 
+        // Add this after nav is loaded:
+        const showLink = document.getElementById('show-edit-form-link');
+        const formContainer = document.getElementById('edit-form-container');
+        if (showLink && formContainer) {
+          showLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            showLink.style.display = 'none';
+            formContainer.style.display = 'block';
+          });
+        }
+
         setTimeout(() => {
           // Theme logic...
           const stylesheet = document.getElementById('theme-stylesheet');
