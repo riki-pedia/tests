@@ -13,8 +13,11 @@
       showLink.addEventListener('click', function(e) {
         e.preventDefault();
         formContainer.style.display = 'block';
-        formContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
         showLink.style.display = 'none';
+        // Wait for the form to be visible before scrolling
+        setTimeout(() => {
+          formContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 50);
         });
        }
      }, 100); // Adjust delay if needed for nav injection
@@ -54,4 +57,11 @@
             });
           }
         }, 0); // 0ms delay to ensure DOM update
+
+        // Prefill the textarea with the article text after nav is loaded
+        const articleDiv = document.querySelector('.text');
+        const textarea = document.querySelector('#edit-article-form textarea[name="content"]');
+        if (articleDiv && textarea) {
+          textarea.value = stripHtml(articleDiv.innerHTML);
+        }
       });

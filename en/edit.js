@@ -12,13 +12,6 @@ function stripHtml(html) {
     return `<div class="text">\n${paragraphs.join('\n')}\n</div>`;
   }
   
-  window.addEventListener('DOMContentLoaded', () => {
-    const articleDiv = document.querySelector('.text');
-    const textarea = document.querySelector('#edit-article-form textarea[name="content"]');
-    if (articleDiv && textarea) {
-      textarea.value = stripHtml(articleDiv.innerHTML);
-    }
-  
     document.getElementById('show-edit-form').onclick = function() {
       document.getElementById('edit-form-container').style.display = 'block';
       this.style.display = 'none';
@@ -46,7 +39,8 @@ function stripHtml(html) {
       const data = {
         filename: form.filename.value,
         content: htmlContent,
-        user: form.user.value
+        user: form.user.value,
+        explanation: form.explanation.value,
       };
   
       let prUrl = "";
@@ -66,20 +60,5 @@ function stripHtml(html) {
       } catch (err) {
         resultDiv.textContent = "❌ Network error.";
       }
-  
-      // 3. notify via formspree
-      if (prUrl) {
-        fetch("https://formspree.io/f/mdkzgpey", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            _subject: "New Rikipedia PR Suggestion",
-            message: `User: ${form.user.value || "anonymous"}\nIP: ${userIp}\nFile: ${form.filename.value}\nPR: ${prUrl}`
-          })
-        });
-      }
     };
   
-
-      }
-    );
