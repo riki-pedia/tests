@@ -4,16 +4,21 @@
       .then(data => {
         document.getElementById('navPh').innerHTML = data;
 
-        // Add this after nav is loaded:
-        const showLink = document.getElementById('show-edit-form-link');
-        const formContainer = document.getElementById('edit-form-container');
-        if (showLink && formContainer) {
-          showLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            showLink.style.display = 'none';
-            formContainer.style.display = 'block';
-          });
-        }
+  document.addEventListener('DOMContentLoaded', function() {
+  // Wait for nav to be loaded if it's injected dynamically
+  setTimeout(function() {
+    const showLink = document.getElementById('show-edit-form-link');
+    const formContainer = document.getElementById('edit-form-container');
+    if (showLink && formContainer) {
+      showLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        formContainer.style.display = 'block';
+        formContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        showLink.style.display = 'none';
+        });
+       }
+     }, 100); // Adjust delay if needed for nav injection
+   });
 
         setTimeout(() => {
           // Theme logic...
