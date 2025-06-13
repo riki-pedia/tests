@@ -69,7 +69,6 @@ function stripHtml(html) {
           }
           return { type: 'p', text: trimmed };
         }).filter(b => b.text);
-
         try {
           const response = await fetch('https://api.rikipedia.workers.dev/', {
             method: 'POST',
@@ -78,7 +77,7 @@ function stripHtml(html) {
               filename: form.filename.value,
               content: blocks,
               user: form.user.value,
-              explanation: form.explanation.value
+              explanation: form.explanation.value,
             })
           });
           const res = await response.json();
