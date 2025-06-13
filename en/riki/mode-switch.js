@@ -17,7 +17,26 @@ function stripHtml(html) {
       .then(response => response.text())
       .then(data => {
         document.getElementById('navPh').innerHTML = data;
-        
+
+    // Prefill the textarea with only headings and paragraphs from .text
+    const articleDiv = document.querySelector('.text');
+    const textarea = document.querySelector('#edit-article-form textarea[name="content"]');
+    if (articleDiv && textarea) {
+      // Select all headings and paragraphs, in order
+      const nodes = articleDiv.querySelectorAll('h1, h2, h3, h4, h5, h6, p');
+      textarea.value = Array.from(nodes)
+        .map(node => {
+          const tag = node.tagName.toLowerCase();
+          if (tag.startsWith('h')) {
+            const level = tag.replace('h', '');
+            return `${'#'.repeat(Number(level))} ${node.textContent.trim()}`;
+          }
+          return node.textContent.trim();
+        })
+        .filter(Boolean)
+        .join('\n\n');
+    }
+
       // Attach the show/hide handler for the edit form link
       const showLink = document.getElementById('show-edit-form-link');
       const formContainer = document.getElementById('edit-form-container');
@@ -31,54 +50,48 @@ function stripHtml(html) {
           }, 50);
         });
       }
-    }, 100);
 
     // Attach form handler after nav is loaded
-    setTimeout(() => {
-      const form = document.getElementById('edit-article-form');
-      if (form) {
-        form.onsubmit = async function(e) {
-          e.preventDefault();
-          const resultDiv = document.getElementById('edit-form-result');
-          resultDiv.textContent = "Submitting...";
-          const plainText = form.content.value;
-          const htmlContent = wrapHtml(plainText);
+    const form = document.getElementById('edit-article-form');
+    if (form) {
+      form.onsubmit = async function(e) {
+        e.preventDefault();
+        const resultDiv = document.getElementById('edit-form-result');
+        resultDiv.textContent = "Submitting...";
+        const plainText = form.content.value;
 
-          // 1. Get user's IP address
-          let userIp = "unknown";
-          try {
-            const ipRes = await fetch("https://api.ipify.org?format=json");
-            const ipData = await ipRes.json();
-            userIp = ipData.ip;
-          } catch (err) {
-            // ignore, fallback to "unknown"
+        // Parse to JSON blocks
+        const blocks = plainText.split(/\n{2,}/).map(block => {
+          const trimmed = block.trim();
+          if (/^#{1,6}\s/.test(trimmed)) {
+            const level = trimmed.match(/^#+/)[0].length;
+            return { type: `h${level}`, text: trimmed.replace(/^#+\s*/, '') };
           }
+          return { type: 'p', text: trimmed };
+        }).filter(b => b.text);
 
-          // 2. Send edit suggestion to your API
-          const data = {
-            filename: form.filename.value,
-            content: htmlContent,
-            user: form.user.value,
-            explanation: form.explanation.value,
-          };
-
-          try {
-            const response = await fetch('https://api.rikipedia.workers.dev/', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(data)
-            });
-            const res = await response.json();
-            if (res.success) {
-              resultDiv.innerHTML = `✅ Suggestion submitted! <a href="${res.pr_url}" target="_blank">View Pull Request</a>`;
-            } else {
-              resultDiv.textContent = "❌ Error: " + (res.error || "Unknown error.");
-            }
-          } catch (err) {
-            resultDiv.textContent = "❌ Network error.";
+        try {
+          const response = await fetch('https://api.rikipedia.workers.dev/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              filename: form.filename.value,
+              content: blocks,
+              user: form.user.value,
+              explanation: form.explanation.value
+            })
+          });
+          const res = await response.json();
+          if (res.success) {
+            resultDiv.innerHTML = `✅ Suggestion submitted! <a href="${res.pr_url}" target="_blank">View Pull Request</a>`;
+          } else {
+            resultDiv.textContent = "❌ Error: " + (res.error || "Unknown error.");
           }
-        };
-      }
+        } catch (err) {
+          resultDiv.textContent = "❌ Network error.";
+        }
+      };
+    }
 
         setTimeout(() => {
           // Theme logic...
@@ -114,11 +127,4 @@ function stripHtml(html) {
             });
           }
         }, 0); // 0ms delay to ensure DOM update
-
-        // Prefill the textarea with the article text after nav is loaded
-        const articleDiv = document.querySelector('.text');
-        const textarea = document.querySelector('#edit-article-form textarea[name="content"]');
-        if (articleDiv && textarea) {
-          textarea.value = stripHtml(articleDiv.innerHTML);
-        }
       });
