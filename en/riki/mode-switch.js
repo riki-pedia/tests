@@ -1,3 +1,5 @@
+// this is really a catch all script, but im too lazy to rename it
+// it handles the theme switcher, the edit form, and the nav bar
 function stripHtml(html) {
     return html
       .replace(/<br\s*\/?>/gi, '\n')
@@ -18,6 +20,44 @@ function stripHtml(html) {
       if (form) {
         form.onsubmit = async function(e) {
           e.preventDefault();
+          const resultDiv = document.getElementById('edit-form-result');
+          resultDiv.textContent = "Submitting...";
+          const plainText = form.content.value;
+          const htmlContent = wrapHtml(plainText);
+
+          // 1. Get user's IP address
+          let userIp = "unknown";
+          try {
+            const ipRes = await fetch("https://api.ipify.org?format=json");
+            const ipData = await ipRes.json();
+            userIp = ipData.ip;
+          } catch (err) {
+            // ignore, fallback to "unknown"
+          }
+
+          // 2. Send edit suggestion to your API
+          const data = {
+            filename: form.filename.value,
+            content: htmlContent,
+            user: form.user.value,
+            explanation: form.explanation.value,
+          };
+
+          try {
+            const response = await fetch('https://api.rikipedia.workers.dev/', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data)
+            });
+            const res = await response.json();
+            if (res.success) {
+              resultDiv.innerHTML = `✅ Suggestion submitted! <a href="${res.pr_url}" target="_blank">View Pull Request</a>`;
+            } else {
+              resultDiv.textContent = "❌ Error: " + (res.error || "Unknown error.");
+            }
+          } catch (err) {
+            resultDiv.textContent = "❌ Network error.";
+          }
         };
       }
     }, 100);
