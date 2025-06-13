@@ -8,6 +8,10 @@ function stripHtml(html) {
       .replace(/\n{3,}/g, '\n\n')
       .trim();
   }
+    function wrapHtml(text) {
+    const paragraphs = text.split(/\n{2,}/).map(p => `<p>${p.replace(/\n/g, ' ')}</p>`);
+    return `<div class="text">\n${paragraphs.join('\n')}\n</div>`;
+  }
 // wait for nav to load
     fetch('./article-nav.html')
       .then(response => response.text())
