@@ -29,9 +29,11 @@ function stripHtml(html) {
           const tag = node.tagName.toLowerCase();
           if (tag.startsWith('h')) {
             const level = tag.replace('h', '');
-            return `${'#'.repeat(Number(level))} ${node.textContent.trim()}`;
+            // Use innerHTML to preserve inline tags
+            return `${'#'.repeat(Number(level))} ${node.innerHTML.trim()}`;
           }
-          return node.textContent.trim();
+          // For paragraphs, also use innerHTML
+          return node.innerHTML.trim();
         })
         .filter(Boolean)
         .join('\n\n');
