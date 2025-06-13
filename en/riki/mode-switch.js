@@ -17,6 +17,21 @@ function stripHtml(html) {
       .then(response => response.text())
       .then(data => {
         document.getElementById('navPh').innerHTML = data;
+        
+      // Attach the show/hide handler for the edit form link
+      const showLink = document.getElementById('show-edit-form-link');
+      const formContainer = document.getElementById('edit-form-container');
+      if (showLink && formContainer) {
+        showLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          formContainer.style.display = 'block';
+          showLink.style.display = 'none';
+          setTimeout(() => {
+            formContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 50);
+        });
+      }
+    }, 100);
 
     // Attach form handler after nav is loaded
     setTimeout(() => {
@@ -64,26 +79,6 @@ function stripHtml(html) {
           }
         };
       }
-    }, 100);
-
-  document.addEventListener('DOMContentLoaded', function() {
-  // Wait for nav to be loaded if it's injected dynamically
-  setTimeout(function() {
-    const showLink = document.getElementById('show-edit-form-link');
-    const formContainer = document.getElementById('edit-form-container');
-    if (showLink && formContainer) {
-      showLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        formContainer.style.display = 'block';
-        showLink.style.display = 'none';
-        // Wait for the form to be visible before scrolling
-        setTimeout(() => {
-          formContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 50);
-        });
-       }
-     }, 100); // Adjust delay if needed for nav injection
-   });
 
         setTimeout(() => {
           // Theme logic...
