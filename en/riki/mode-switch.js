@@ -4,6 +4,16 @@
       .then(data => {
         document.getElementById('navPh').innerHTML = data;
 
+    // Attach form handler after nav is loaded
+    setTimeout(() => {
+      const form = document.getElementById('edit-article-form');
+      if (form) {
+        form.onsubmit = async function(e) {
+          e.preventDefault();
+        };
+      }
+    }, 100);
+
   document.addEventListener('DOMContentLoaded', function() {
   // Wait for nav to be loaded if it's injected dynamically
   setTimeout(function() {
