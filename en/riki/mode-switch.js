@@ -1,3 +1,11 @@
+function stripHtml(html) {
+    return html
+      .replace(/<br\s*\/?>/gi, '\n')
+      .replace(/<\/p>/gi, '\n\n')
+      .replace(/<[^>]+>/g, '')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+  }
 // wait for nav to load
     fetch('./article-nav.html')
       .then(response => response.text())
