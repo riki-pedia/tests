@@ -1,5 +1,8 @@
 // this is really a catch all script, but im too lazy to rename it
 // it handles the theme switcher, the edit form, and the nav bar
+// also sends the api the edit stuff
+// this is a bit of a mess, but it works
+// and if it works dont touch it
 function stripHtml(html) {
     return html
       .replace(/<br\s*\/?>/gi, '\n')

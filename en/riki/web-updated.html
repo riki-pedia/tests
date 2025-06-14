@@ -15,9 +15,9 @@
 <script src="./mode-switch.js"></script>
 <body>
 <div id = "navPh" class = "article-nav"> <!-- placeholder for the ui from nav --> </div>
-  <div class = "text">
-  <h1>How Rikipedia Works</h1>
-  <h3>The process of making this website has gotten more and more complex over the past few months, and it may or may not continue to do so. I will put updates here instead of the old article, which will be deleted soon. For now, please read this.</h3>
+<div class = "text">
+<h1>How Rikipedia Works</h1>
+<h3>The process of making this website has gotten more and more complex over the past few months, and it may or may not continue to do so. I will put updates here instead of the old article, which will be deleted soon. For now, please read this.</h3>
 <h4>Rikipedia is made of several key components that will be mentioned in this article. I am not recommending or endorsing any. Just my experience.</h4>
 <h2>PowerShell</h2>
 <p>First, I create a new file with PowerShell. In case you don't know, PowerShell is Microsoft's command line application that has ultimate control over Windows machines. For instance, if used incorrectly, PowerShell can instantly trigger a BSOD (blue screen of death). The command to make a new file would be new-item [path]. This command creates a new file in the path given. If you are a beginner, try your best to avoid PowerShell as it is for advanced users.</p><br/>
@@ -38,26 +38,25 @@
 <br/><h2>Cloudflare</h2>
 <p>...Cloudflare. Cloudflare is a website security and delivery network. Cloudflare blocks bad requests, caches my content, and has a user-friendly UI. It is easy to use the app and have full control over what can access your website. During the writing of this article, I used Cloudflare's easy UI to block this annoying crawler that kept trying to get into my website. Cloudflare has top security and has most of my DNS records going through the servers. Cloudflare also helps get me useful analytics and allows me to have full control over what happens. My website would likely be controlled by a hacker right now if it were not for Cloudflare.</p><br/>
 <img src = "https://docs.riki-pedia.org/images/cloud.png" width = "400"/>
-     </div>
-     <!-- Example edit suggestion form -->
+</div>
 <div id="edit-form-container" style="display:none;" class="edit-form">
-  <h3>Suggest an Edit for this Article</h3>
-  <form id="edit-article-form" autocomplete="off">
-    <label>
-      Your name or email<br>
-      <input type="text" name="user" required />
-    </label><br><br>
-    <label>Explanation of change(s) <br/>
-    <input type="text" name="explanation" required /><br/><br/>
-    </label>
-    <label>
-      Suggested changes (plain text):<br>
-      <textarea name="content" rows="10" cols="60" required></textarea>
-    </label><br><br>
-    <input type="hidden" name="filename" value="en/riki/web-updated.html" />
-    <button type="submit">Submit Suggestion</button>
-  </form>
-  <div id="edit-form-result"></div>
+<h3>Suggest an Edit for this Article</h3>
+<form id="edit-article-form" autocomplete="off">
+<label>
+Your name or email<br>
+<input type="text" name="user" required />
+</label><br><br>
+<label>Explanation of change(s) <br/>
+<input type="text" name="explanation" required /><br/><br/>
+</label>
+<label>
+Suggested changes (markdown):<br>
+<textarea name="content" rows="10" cols="60" required></textarea>
+</label><br><br>
+<input type="hidden" name="filename" value="en/riki/web-updated.html" />
+<button type="submit">Submit Suggestion</button>
+</form>
+<div id="edit-form-result"></div>
 </div>
 </body>
 </html>
