@@ -76,7 +76,7 @@ function stripHtml(html) {
         }).filter(b => b.text);
 
         try {
-          const response = await fetch('https://api.rikipedia.workers.dev/', {
+          const response = await fetch('https://api.riki-pedia.org', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
