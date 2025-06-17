@@ -3,6 +3,7 @@
 // also sends the api the edit stuff
 // this is a bit of a mess, but it works
 // and if it works dont touch it
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function stripHtml(html) {
     return html
       .replace(/<br\s*\/?>/gi, '\n')
@@ -11,6 +12,7 @@ function stripHtml(html) {
       .replace(/\n{3,}/g, '\n\n')
       .trim();
   }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     function wrapHtml(text) {
     const paragraphs = text.split(/\n{2,}/).map(p => `<p>${p.replace(/\n/g, ' ')}</p>`);
     return `<div class="text">\n${paragraphs.join('\n')}\n</div>`;
@@ -87,11 +89,18 @@ function stripHtml(html) {
             })
           });
           const res = await response.json();
+          // fake success
           if (res.success) {
-            resultDiv.innerHTML = `✅ Suggestion submitted! <a href="${res.pr_url}" target="_blank">View Pull Request</a>`;
+            if (res.pr_url) {
+              resultDiv.innerHTML = `✅ Suggestion submitted! <a href="${res.pr_url}" target="_blank">View Pull Request</a>`;
+            } else {
+              // Shadow-banned or no PR created
+              resultDiv.textContent = "✅ Suggestion submitted!";
+            }
           } else {
             resultDiv.textContent = "❌ Error: " + (res.error || "Unknown error.");
           }
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (err) {
           resultDiv.textContent = "❌ Network error.";
         }
